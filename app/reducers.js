@@ -1,31 +1,40 @@
 import {combineReducers} from "redux";
 import * as types from "./constants";
+import {LOAD_WINDOW} from "./constants";
 import {merge} from "./commons";
-import {WEBSOCKET_OPEN} from "./redux-websocket/types";
+import {SOCKET_CLOSED} from "./constants";
+import {SOCKET_CONNECTED} from "./constants";
+import {SOCKET_CONNECTING} from "./constants";
+import {CHANGE_URL} from "./constants";
 
-function base(state = {backendUrl: "ws://localhost:8080/ws", wsConnected: 'no'}, action) {
+function base(state = {backendUrl: "ws://localhost:8080", wsConnected: 'no'}, action) {
   switch (action.type) {
-    case types.CHANGE_URL:
+    case CHANGE_URL:
       return {backendUrl: action.newUrl};
-    case types.CONNECTING_WS:
+    case SOCKET_CONNECTING:
       return merge(state, {wsConnected: 'progress'});
-    case WEBSOCKET_OPEN:
-      console.log('websocker connected');
+    case SOCKET_CONNECTED:
+      console.log('socket.io connected');
       return merge(state, {wsConnected: 'connected'});
+    case SOCKET_CLOSED:
+      console.log('socket.io connected');
+      return merge(state, {wsConnected: 'no'});
     default:
       return state;
   }
 }
 
-function eventsPage(state = {type: null, data: null, qprop: null}, action) {
+function eventsLog(state = {logs: []}, action) {
   switch (action.type) {
     default:
       return state
   }
 }
 
-function mainPage(state = {enabled: false}, action) {
+function mainPage(state = {}, action) {
   switch (action.type) {
+    case LOAD_WINDOW:
+      return {type: action.window};
     default:
       return state
   }
@@ -41,7 +50,7 @@ function appState(state = {enabled: false}, action) {
 }
 
 
-const rootReducer = combineReducers({base, mainPage, eventsPage, appState,});
+const rootReducer = combineReducers({base, mainPage, eventsLog, appState,});
 
 export default rootReducer
 

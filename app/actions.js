@@ -1,8 +1,7 @@
 import * as types from "./constants";
-import {SUGGESTIONS_TUNNEL} from "./constants";
-import fetch from "isomorphic-fetch";
+import {SEND_MESSAGE, SOCKET_CONNECT} from "./constants";
 import {merge} from "./commons";
-import {WEBSOCKET_CONNECT, WEBSOCKET_SEND} from "./redux-websocket/types";
+import {GPBetting} from "./containers/views/index";
 
 
 function action(type, more) {
@@ -11,27 +10,46 @@ function action(type, more) {
 
 export function openSocket(address) {
   return {
-    type: WEBSOCKET_CONNECT,
-    payload: {url: address}
+    type: SOCKET_CONNECT,
+    url: address,
   }
 }
 
 export function sendMessage(message) {
   return {
-    type: WEBSOCKET_SEND,
-    payload: message
+    type: SEND_MESSAGE,
+    data: message
   }
 }
-
 
 export function connectToBackend() {
   return (dispatch, getState) => {
-    dispatch(openSocket(getState().base.backendUrl))
+    dispatch(action(types.SOCKET_CONNECTING));
+    dispatch(openSocket(getState().base.backendUrl));
   }
 }
-// export function toggleShowingState() {
-//   return action(types.TOGGLE_APP_STATE);
-// }
+
+export function changeBackendURL(url) {
+  return (dispatch) => {
+    dispatch({type: types.CHANGE_URL, newUrl: url});
+    dispatch(connectToBackend());
+  }
+}
+
+export function toggleShowingState() {
+  return action(types.TOGGLE_APP_STATE);
+}
+
+
+export function gpBettingLeague() {
+  return {type: types.LOAD_WINDOW, window: GPBetting}
+}
+
+export function handleServerMessage(msg) {
+  console.log("received " + msg);
+  return {type: ''}
+}
+
 //
 // export function connect(url, token) {
 //   return {
@@ -157,10 +175,6 @@ export function connectToBackend() {
 //   }
 // }
 //
-// export function loadTextLivePrompt() {
-//   return {type: types.LOAD_LIVE_PROMPT_WINDOW}
-// }
-//
 // export function updateSuggestions(data) {
 //   return {type: types.LOADED_PROP_SUGGESTIONS, data: data}
 // }
@@ -186,15 +200,6 @@ export function connectToBackend() {
 //     dispatch(loadSelectedRoom())
 //   }
 // }
-//
-//
-// export function changeServiceURL(serviceURL) {
-//   return (dispatch) => {
-//     dispatch({type: types.CHANGE_URL, newUrl: serviceURL});
-//     dispatch(loadToken());
-//   }
-// }
-//
 //
 // export function tryLogin(phone) {
 //   return prepareLogin(phone)

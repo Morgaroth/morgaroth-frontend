@@ -1,0 +1,1 @@
+export const GPBetting = 'gp-betting-league';
