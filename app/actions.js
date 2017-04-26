@@ -46,7 +46,7 @@ export function gpBettingLeague() {
 }
 
 export function handleServerMessage(msg) {
-  console.log("received " + msg);
+  console.log("received ", msg);
   return {type: ''}
 }
 
