@@ -2,6 +2,10 @@ export function merge(b, c) {
   return Object.assign({}, b, c)
 }
 
+export function clone(a) {
+  return JSON.parse(JSON.stringify(a));
+}
+
 export function uuid() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
     let r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);

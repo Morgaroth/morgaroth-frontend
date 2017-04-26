@@ -1,11 +1,7 @@
 import {combineReducers} from "redux";
 import * as types from "./constants";
-import {LOAD_WINDOW} from "./constants";
-import {merge} from "./commons";
-import {SOCKET_CLOSED} from "./constants";
-import {SOCKET_CONNECTED} from "./constants";
-import {SOCKET_CONNECTING} from "./constants";
-import {CHANGE_URL} from "./constants";
+import {ADD_EVENT, CHANGE_URL, LOAD_WINDOW, SOCKET_CLOSED, SOCKET_CONNECTED, SOCKET_CONNECTING} from "./constants";
+import {clone, merge} from "./commons";
 
 function base(state = {backendUrl: "ws://localhost:8080", wsConnected: 'no'}, action) {
   switch (action.type) {
@@ -26,6 +22,10 @@ function base(state = {backendUrl: "ws://localhost:8080", wsConnected: 'no'}, ac
 
 function eventsLog(state = {logs: []}, action) {
   switch (action.type) {
+    case ADD_EVENT:
+      let a = clone(state.logs);
+      a.unshift(action.data);
+      return merge(state, {logs: a.slice(0, 30)});
     default:
       return state
   }

@@ -2,6 +2,7 @@
 export const CHANGE_URL = 'CHANGE_URL';
 export const TOGGLE_APP_STATE = 'TOGGLE_APP_STATE';
 export const LOAD_WINDOW = 'LOAD_WINDOW';
+export const ADD_EVENT = 'ADD_EVENT';
 export const SOCKET_CONNECT = 'SOCKET_CONNECT';
 export const SOCKET_DISCONNECT = 'SOCKET_DISCONNECT';
 export const SEND_MESSAGE = 'SEND_MESSAGE ';

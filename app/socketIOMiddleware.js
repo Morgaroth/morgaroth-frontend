@@ -9,6 +9,9 @@ const socketMiddleware = (function () {
   const onMessage = (store) => evt => {
     store.dispatch(actions.handleServerMessage(evt));
   };
+  const onServerLog = (store) => evt => {
+    store.dispatch(actions.appendEvent(evt));
+  };
 
   return store => next => action => {
     switch (action.type) {
@@ -31,6 +34,7 @@ const socketMiddleware = (function () {
           store.dispatch({type: SOCKET_CLOSED});
 
         });
+        socket.on("ServerEvent", onServerLog(store));
         socket.on("SSE", onMessage(store));
         break;
 

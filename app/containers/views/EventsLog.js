@@ -18,8 +18,13 @@ class EventsLog extends Component {
 
   render() {
     const {logs} = this.props;
-    return <div style={{border: '2px solid black'}} className={this.props.cls}>Showing {logs.length} logs...</div>;
-
+    let elements = [];
+    for (let e of logs) {
+      elements.push(<div>{e.source}: {e.message}</div>);
+    }
+    return <div style={{border: '2px solid black'}} className={this.props.cls}>
+      {elements}
+    </div>;
   }
 }
 

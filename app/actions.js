@@ -1,7 +1,10 @@
 import * as types from "./constants";
 import {SEND_MESSAGE, SOCKET_CONNECT} from "./constants";
 import {merge} from "./commons";
-import {GPBetting} from "./containers/views/index";
+import {GPBetting, PhotoManager} from "./containers/views/index";
+import {ADD_EVENT} from "./constants";
+import {LOAD_WINDOW} from "./constants";
+import {TOGGLE_APP_STATE} from "./constants";
 
 
 function action(type, more) {
@@ -37,17 +40,25 @@ export function changeBackendURL(url) {
 }
 
 export function toggleShowingState() {
-  return action(types.TOGGLE_APP_STATE);
+  return action(TOGGLE_APP_STATE);
 }
 
 
 export function gpBettingLeague() {
-  return {type: types.LOAD_WINDOW, window: GPBetting}
+  return {type: LOAD_WINDOW, window: GPBetting}
+}
+
+export function photoManager() {
+  return {type: LOAD_WINDOW, window: PhotoManager}
 }
 
 export function handleServerMessage(msg) {
   console.log("received ", msg);
   return {type: ''}
+}
+
+export function appendEvent(ev) {
+  return action(ADD_EVENT, {data: ev})
 }
 
 //
