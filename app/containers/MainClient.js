@@ -8,8 +8,8 @@ class MainClient extends Component {
   render() {
     return <div>
       <AppActions cls="col-md-12"/>
-      <MainView cls='col-md-8'/>
-      <EventsLog cls="col-md-4"/>
+      <MainView cls='col-md-4'/>
+      <EventsLog cls="col-md-8"/>
     </div>;
   }
 }

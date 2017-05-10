@@ -10,6 +10,7 @@ class AppActions extends Component {
     return (<div style={{border: '1px solid black', marginBottom: '10px'}} className={cls}>
       <button onClick={() => actions.gpBettingLeague()}>GP BL</button>
       <button onClick={() => actions.photoManager()}>Photo Manager</button>
+      <button onClick={() => actions.spotifyManager()}>Spotify</button>
       {/*<button onClick={() => actions.loadDatabaseActions()}>DB Actions</button>*/}
       {/*<button onClick={() => actions.loadBetBrowser()}>Bet Browser</button>*/}
       {/*<button onClick={() => actions.fetchShortcuts()}>Shortcuts!</button>*/}

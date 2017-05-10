@@ -1,7 +1,7 @@
 import * as types from "./constants";
 import {SEND_MESSAGE, SOCKET_CONNECT} from "./constants";
 import {merge} from "./commons";
-import {GPBetting, PhotoManager} from "./containers/views/index";
+import {GPBetting, PhotoManager, Spotify} from "./containers/views/index";
 import {ADD_EVENT} from "./constants";
 import {LOAD_WINDOW} from "./constants";
 import {TOGGLE_APP_STATE} from "./constants";
@@ -50,6 +50,9 @@ export function gpBettingLeague() {
 
 export function photoManager() {
   return {type: LOAD_WINDOW, window: PhotoManager}
+}
+export function spotifyManager() {
+  return {type: LOAD_WINDOW, window: Spotify}
 }
 
 export function handleServerMessage(msg) {
