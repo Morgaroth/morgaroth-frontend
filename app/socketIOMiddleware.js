@@ -51,8 +51,7 @@ const socketMiddleware = (function () {
         break;
 
       case SEND_MESSAGE:
-        console.log("sending message " + action);
-        console.log(action);
+        console.log("sending message",action);
         socket.emit(action.data.event, action.data.args);
         break;
 

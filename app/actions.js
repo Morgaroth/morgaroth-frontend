@@ -58,9 +58,21 @@ export function crontab() {
   return {type: LOAD_WINDOW, window: Cron}
 }
 
+export function fetchCrontabEntries() {
+  return sendMessage({
+    event: 'GetEntries',
+    args: {}
+  })
+}
+
 export function handleServerMessage(name, data) {
-  console.log("received", name, data);
-  return {type: name, data: data}
+  console.log("Received", name, data, "from server.");
+  return (dispatch) => {
+    if (name === 'CrontabEntryAdded' || name === 'CrontabEntryRemoved') {
+      dispatch(fetchCrontabEntries())
+    }
+    dispatch({type: name, data: data})
+  }
 }
 
 export function appendEvent(ev) {

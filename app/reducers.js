@@ -5,7 +5,7 @@ import {clone, merge} from "./commons";
 import {GOT_CRONTAB_ENTRIES} from "./constants";
 import {GOT_COMMANDS_LIST} from "./constants";
 
-function base(state = {backendUrl: "ws://localhost:8080", wsConnected: 'no'}, action) {
+function base(state = {backendUrl: "ws://localhost:8090", wsConnected: 'no'}, action) {
   switch (action.type) {
     case CHANGE_URL:
       return {backendUrl: action.newUrl};
