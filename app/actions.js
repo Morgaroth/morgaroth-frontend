@@ -1,7 +1,7 @@
 import * as types from "./constants";
 import {SEND_MESSAGE, SOCKET_CONNECT} from "./constants";
 import {merge} from "./commons";
-import {GPBetting, PhotoManager, Spotify} from "./containers/views/index";
+import {Cron, GPBetting, PhotoManager, Spotify} from "./containers/views/index";
 import {ADD_EVENT} from "./constants";
 import {LOAD_WINDOW} from "./constants";
 import {TOGGLE_APP_STATE} from "./constants";
@@ -54,10 +54,13 @@ export function photoManager() {
 export function spotifyManager() {
   return {type: LOAD_WINDOW, window: Spotify}
 }
+export function crontab() {
+  return {type: LOAD_WINDOW, window: Cron}
+}
 
-export function handleServerMessage(msg) {
-  console.log("received ", msg);
-  return {type: ''}
+export function handleServerMessage(name, data) {
+  console.log("received", name, data);
+  return {type: name, data: data}
 }
 
 export function appendEvent(ev) {

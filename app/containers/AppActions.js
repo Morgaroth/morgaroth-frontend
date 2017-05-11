@@ -11,10 +11,7 @@ class AppActions extends Component {
       <button onClick={() => actions.gpBettingLeague()}>GP BL</button>
       <button onClick={() => actions.photoManager()}>Photo Manager</button>
       <button onClick={() => actions.spotifyManager()}>Spotify</button>
-      {/*<button onClick={() => actions.loadDatabaseActions()}>DB Actions</button>*/}
-      {/*<button onClick={() => actions.loadBetBrowser()}>Bet Browser</button>*/}
-      {/*<button onClick={() => actions.fetchShortcuts()}>Shortcuts!</button>*/}
-      {/*<button onClick={() => actions.loadVersionsMatrix()}>Matrix</button>*/}
+      <button onClick={() => actions.crontab()}>CronTab</button>
     </div>)
   }
 }

@@ -14,14 +14,14 @@ class GPBettingLeague extends Component {
   doWork() {
     let a = document.getElementById("password.input");
     this.props.actions.sendMessage({
-      event: 'RunGpBettingLeague',
+      event: 'RunGPBettingLeague',
       args: {password: a.value},
     });
   };
 
   doWorkWithPrevious() {
     this.props.actions.sendMessage({
-      event: 'RunGpBettingLeague',
+      event: 'RunGPBettingLeague',
       args: {usePrevious: true},
     });
   };
@@ -29,9 +29,9 @@ class GPBettingLeague extends Component {
   render() {
     return (<div className={this.props.cls}>
       <div>
-        <input id="password.input" type="password" onKeyUp={this.handleEnter.bind(this)}/>
+        <text>Password:</text>
+        <input id="password.input" type="password" onKeyUp={this.handleEnter.bind(this)}/><br/>
         <button onClick={this.doWork.bind(this)}>Make Selections!</button>
-        <br/>
         <button onClick={this.doWorkWithPrevious.bind(this)}>Make Selections with previous password!</button>
       </div>
     </div>)

@@ -2,6 +2,8 @@ import {combineReducers} from "redux";
 import * as types from "./constants";
 import {ADD_EVENT, CHANGE_URL, LOAD_WINDOW, SOCKET_CLOSED, SOCKET_CONNECTED, SOCKET_CONNECTING} from "./constants";
 import {clone, merge} from "./commons";
+import {GOT_CRONTAB_ENTRIES} from "./constants";
+import {GOT_COMMANDS_LIST} from "./constants";
 
 function base(state = {backendUrl: "ws://localhost:8080", wsConnected: 'no'}, action) {
   switch (action.type) {
@@ -15,6 +17,9 @@ function base(state = {backendUrl: "ws://localhost:8080", wsConnected: 'no'}, ac
     case SOCKET_CLOSED:
       console.log('socket.io connected');
       return merge(state, {wsConnected: 'no'});
+    case GOT_COMMANDS_LIST:
+      console.log('socket.io connected');
+      return merge(state, {commands: action.data});
     default:
       return state;
   }
@@ -35,6 +40,8 @@ function mainPage(state = {}, action) {
   switch (action.type) {
     case LOAD_WINDOW:
       return {type: action.window};
+    case GOT_CRONTAB_ENTRIES:
+      return merge(state, {entries: action.data});
     default:
       return state
   }

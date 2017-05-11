@@ -3,9 +3,10 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import * as Actions from "../actions";
 import GPBettingLeague from "./views/GPBettingLeague";
-import {GPBetting, PhotoManager, Spotify} from "./views/index";
+import {Cron, GPBetting, PhotoManager, Spotify} from "./views/index";
 import PhotoManagerView from "./views/PhotoManagerView";
 import SpotifyManager from "./views/SpotifyManager";
+import CronEditor from "./views/CronEditor";
 
 class MainView extends Component {
 
@@ -17,6 +18,8 @@ class MainView extends Component {
         return <PhotoManagerView />;
       case Spotify:
         return <SpotifyManager />;
+      case Cron:
+        return <CronEditor />;
       case null:
         return <div style={{fontSize: 40, lineHeight: 2}} className="label label-danger">Blank Info
           Page</div>;

@@ -7,7 +7,7 @@ const socketMiddleware = (function () {
   let socket = null;
 
   const onMessage = (store) => evt => {
-    store.dispatch(actions.handleServerMessage(evt));
+    store.dispatch(actions.handleServerMessage(evt.name, evt.value));
   };
   const onServerLog = (store) => evt => {
     store.dispatch(actions.appendEvent(evt));
