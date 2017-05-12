@@ -5,7 +5,19 @@ import {Cron, GPBetting, PhotoManager, Spotify} from "./containers/views/index";
 import {ADD_EVENT} from "./constants";
 import {LOAD_WINDOW} from "./constants";
 import {TOGGLE_APP_STATE} from "./constants";
+import * as PropTypes from "react/lib/ReactPropTypes";
 
+
+export const actionsProp = PropTypes.shape({
+  sendMessage: PropTypes.func,
+  fetchCrontabEntries: PropTypes.func,
+  connectToBackend: PropTypes.func,
+  changeBackendURL: PropTypes.func,
+  gpBettingLeague: PropTypes.func,
+  toggleShowingState: PropTypes.func,
+  photoManager: PropTypes.func,
+  spotifyManager: PropTypes.func,
+});
 
 function action(type, more) {
   return merge({type: type}, more || {})

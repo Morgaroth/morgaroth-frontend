@@ -2,8 +2,9 @@ import React, {Component, PropTypes} from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import * as Actions from "../../actions";
+import {actionsProp} from "../../actions";
 import {uuid} from "../../commons";
-import Select from 'react-select';
+import Select from "react-select";
 
 class CronEditor extends Component {
 
@@ -110,9 +111,13 @@ class CronEditor extends Component {
 }
 
 CronEditor.propTypes = {
-  actions: PropTypes.object.isRequired,
+  actions: actionsProp,
   backendConnected: PropTypes.bool,
-  entries: PropTypes.array,
+  entries: PropTypes.arrayOf(PropTypes.shape({
+    defString: PropTypes.string.isRequired,
+    command: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  })),
   commands: PropTypes.array,
 };
 
