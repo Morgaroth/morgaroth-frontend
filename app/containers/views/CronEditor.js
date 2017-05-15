@@ -21,10 +21,7 @@ class CronEditor extends Component {
 
   componentDidMount() {
     this.props.actions.fetchCrontabEntries();
-    this.props.actions.sendMessage({
-      event: 'GetCommandsList',
-      args: {}
-    });
+    this.props.actions.sendMessage({event: 'GetCommandsList'});
   }
 
   componentDidUpdate() {
@@ -34,14 +31,6 @@ class CronEditor extends Component {
       }),
       selectValue: this.state.selectValue,
     }
-  }
-
-  uriAction(action) {
-    let a = document.getElementById("uri.input");
-    this.props.actions.sendMessage({
-      event: action,
-      args: {uri: a.value},
-    });
   }
 
   removeEntry(name) {
@@ -59,7 +48,7 @@ class CronEditor extends Component {
     let cmd = this.state.selectValue;
     // let cmd = this.cmd.value;
     console.log(this, this.state, cmd);
-    let args = document.getElementById("cron.args").value;
+    let args = JSON.parse(document.getElementById("cron.args").value);
     let def = document.getElementById("cron.def").value;
     this.props.actions.sendMessage({
       event: 'AddEntry',

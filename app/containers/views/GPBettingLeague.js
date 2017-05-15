@@ -7,16 +7,34 @@ class GPBettingLeague extends Component {
 
   handleEnter(e) {
     if (e.keyCode === 13) {
-      this.doWork();
+      this.saveCreds();
     }
   }
 
   doWork() {
-    let a = document.getElementById("password.input");
-    this.props.actions.sendMessage({
-      event: 'RunGPBettingLeague',
-      args: {password: a.value},
-    });
+    let userLogin = document.getElementById("login.input").value;
+    let userpass = document.getElementById("password.input").value;
+    if (userLogin.length > 0 && userpass.length > 0) {
+      this.props.actions.sendMessage({
+        event: 'RunGPBettingLeague',
+        args: {credentials: {user: userLogin, password: userpass}},
+      });
+    } else {
+      this.props.actions.internalEvent('GPFront', 'Empty credentials!')
+    }
+  };
+
+  saveCreds() {
+    let userLogin = document.getElementById("login.input").value;
+    let userpass = document.getElementById("password.input").value;
+    if (userLogin.length > 0 && userpass.length > 0) {
+      this.props.actions.sendMessage({
+        event: 'SaveGPCredentials',
+        args: {creds: {user: userLogin, password: userpass}},
+      });
+    } else {
+      this.props.actions.internalEvent('GPFront', 'Empty credentials!')
+    }
   };
 
   doWorkWithPrevious() {
@@ -29,10 +47,16 @@ class GPBettingLeague extends Component {
   render() {
     return (<div className={this.props.cls}>
       <div>
-        <text>Password:</text>
+        <text className="col-sm-2">Login:</text>
+        <input id="login.input" type="text" value='mateusz.jaje'/><br/>
+        <text className="col-sm-2">Password:</text>
         <input id="password.input" type="password" onKeyUp={this.handleEnter.bind(this)}/><br/>
+        <button onClick={this.saveCreds.bind(this)}>Store credentials!</button>
         <button onClick={this.doWork.bind(this)}>Make Selections!</button>
         <button onClick={this.doWorkWithPrevious.bind(this)}>Make Selections with previous password!</button>
+        <button onClick={() => this.props.actions.sendMessage({event: 'RunGPBettingLeagueTomorrowPreviousPass'})}>Run
+          for tomorrow!
+        </button>
       </div>
     </div>)
   }

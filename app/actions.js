@@ -17,6 +17,7 @@ export const actionsProp = PropTypes.shape({
   toggleShowingState: PropTypes.func,
   photoManager: PropTypes.func,
   spotifyManager: PropTypes.func,
+  internalEvent: PropTypes.func,
 });
 
 function action(type, more) {
@@ -33,7 +34,7 @@ export function openSocket(address) {
 export function sendMessage(message) {
   return {
     type: SEND_MESSAGE,
-    data: message
+    data: merge({args: {}}, message)
   }
 }
 
@@ -71,10 +72,7 @@ export function crontab() {
 }
 
 export function fetchCrontabEntries() {
-  return sendMessage({
-    event: 'GetEntries',
-    args: {}
-  })
+  return sendMessage({event: 'GetEntries'})
 }
 
 export function handleServerMessage(name, data) {
@@ -85,6 +83,10 @@ export function handleServerMessage(name, data) {
     }
     dispatch({type: name, data: data})
   }
+}
+
+export function internalEvent(source, text) {
+  return action(ADD_EVENT, {data: {source: source, message: text}})
 }
 
 export function appendEvent(ev) {
