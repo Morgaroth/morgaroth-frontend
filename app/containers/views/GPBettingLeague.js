@@ -13,11 +13,11 @@ class GPBettingLeague extends Component {
 
   doWork() {
     let userLogin = document.getElementById("login.input").value;
-    let userpass = document.getElementById("password.input").value;
-    if (userLogin.length > 0 && userpass.length > 0) {
+    let userPass = document.getElementById("password.input").value;
+    if (userLogin.length > 0 && userPass.length > 0) {
       this.props.actions.sendMessage({
         event: 'RunGPBettingLeague',
-        args: {credentials: {user: userLogin, password: userpass}},
+        args: {credentials: {user: userLogin, password: userPass}},
       });
     } else {
       this.props.actions.internalEvent('GPFront', 'Empty credentials!')
