@@ -12,7 +12,7 @@ export default function configureStore(initialState) {
     applyMiddleware(thunkMiddleware, socketMiddleware, createLogger())
   );
 
-  store.dispatch(connectToBackend("ws://localhost:8080"));
+  store.dispatch(connectToBackend("ws://127.0.0.1:8888"));
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
     module.hot.accept('./reducers', () => {
